@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-md-6">
+        <form [formGroup]="myForm">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input #title [(ngModel)]="product[4]" id="title" type="text" class="form-control"
+                    formControlName="title">
+                <hr />
+                <div class=" alert alert-danger" *ngIf="myForm.controls.title.invalid && myForm.controls.title.dirty">
+                    <div *ngIf="myForm.controls.title.errors.required">Title is Required</div>
+                    <div *ngIf="myForm.controls.title.errors.minlength">Title must be at least 4 characters</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <div class="input-group">
+                    <input #price [(ngModel)]="product[3]" id="price" type="text" class="form-control"
+                        formControlName="price">
+                    <div class="input-group-addon">
+                        <span class="input-group-text">$</span>
+                    </div>
+                </div>
+                <hr />
+                <div class="alert alert-danger" *ngIf=" myForm.controls.price.touched && myForm.controls.price.invalid">
+                    <div *ngIf="myForm.controls.price.errors.required">Price Required</div>
+                    <div *ngIf="myForm.controls.price.errors.pattern">Price Should Be Number</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select #category [(ngModel)]="product[0]" id="category" type="text" class="form-control"
+                    formControlName="category">
+                    <option value=""></option>
+                    <option *ngFor="let c of categories$ | async" [value]="c.name">{{c.name}}</option>
+                </select>
+                <hr />
+                <div class="alert alert-danger"
+                    *ngIf=" myForm.controls.category.touched && myForm.controls.category.invalid">
+                    Category is Required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="image">Image</label>
+                <input #image [(ngModel)]="product[2]" id="image" type="text" class="form-control"
+                    formControlName="image">
+            </div>
+            <hr />
+            <div class="alert alert-danger" *ngIf=" myForm.controls.image.touched && myForm.controls.image.invalid">
+                <div *ngIf="myForm.controls.image.errors.required">image URL Required</div>
+                <div *ngIf="myForm.controls.image.errors.pattern">invalid image pattern</div>
+            </div>
+            <button class="btn btn-primary" [disabled]="myForm.invalid" (click)="onSave(myForm.value)">Save</button>
+            <button type="button" class="btn btn-danger m-1" (click)="delete()">Delete</button>
+        </form>
+        <hr />
+    </div>
+    <div class="col-md-6">
+        <div *ngIf="myForm.controls.title.value" class="card">
+            <img [src]="myForm.controls.image.value" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">{{myForm.controls.title.value}}</h5>
+                <p class="card-text">{{myForm.controls.price.value | currency: 'USD': true}}</p>
+            </div>
+        </div>
+    </div>
+</div>

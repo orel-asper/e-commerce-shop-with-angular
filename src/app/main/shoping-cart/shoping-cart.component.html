@@ -1,0 +1,40 @@
+<h1>Shopping cart</h1>
+<ng-container>
+    <p>You have {{shoppingCartItemCount}} item in your shopping cart.</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of cartProductId; let i = index">
+                <ng-container *ngIf="cartProduct[0][cartProductId[i]].quantity !== 0">
+                    <td><img class="thumbnail" [src]="cartProduct[0][cartProductId[i]].product.image" /></td>
+                    <td>{{cartProduct[0][cartProductId[i]].product.title}}</td>
+                    <td>{{cartProduct[0][cartProductId[i]].quantity}}</td>
+                    <td>{{cartProduct[0][cartProductId[i]].product.price }}</td>
+                    <td>{{cartProduct[0][cartProductId[i]].product.price * cartProduct[0][cartProductId[i]].quantity | currency: 'USD' : true}}
+                    </td>
+                </ng-container>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>{{Tprise | currency: 'USD' : true}}</th>
+            </tr>
+        </tfoot>
+    </table>
+    <ng-container *ngIf="cartProductId">
+        <button class="btn btn-warning btn-sm m-1" (click)="clearCart()">Remove Items</button>
+        <a class="btn btn-success btn-sm" routerLink="/chack-out">Chack Out</a>
+    </ng-container>
+</ng-container>

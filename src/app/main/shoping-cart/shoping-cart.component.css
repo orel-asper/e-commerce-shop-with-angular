@@ -1,0 +1,43 @@
+/* Equal-height card images, cf. https://stackoverflow.com/a/47698201/1375163*/
+.thumbnail {
+    /*height: 11vw;*/
+    object-fit: cover;
+}
+
+@media (max-width: 574px) {
+  .thumbnail {
+    display: none;
+  }
+}
+  /* Small devices (landscape phones, 576px and up) */
+  @media (min-width: 576px) {
+    .thumbnail {
+      width: 35%;
+      height: 15%;
+        border-radius: 100%;
+    }
+  }
+  /* Medium devices (tablets, 768px and up) */
+  @media (min-width: 768px) {
+    .thumbnail {
+      width: 18%;
+      height: 15%;
+        border-radius: 100%;
+    }
+  }
+  /* Large devices (desktops, 992px and up) */
+  @media (min-width: 992px) {
+    .thumbnail {
+      width: 10%;
+      height: 15%;
+        border-radius: 100%;
+    }
+  }
+  /* Extra large devices (large desktops, 1200px and up) */
+  @media (min-width: 992px) {
+    .thumbnail {
+        width: 10%;
+        height: 15%;
+        border-radius: 100%;
+    }
+  }
